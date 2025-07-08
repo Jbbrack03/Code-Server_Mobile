@@ -88,19 +88,31 @@ public struct Terminal: Codable, Identifiable, Equatable, Hashable {
     
     // MARK: - Mock Helper
     
-    public static func mock() -> Terminal {
+    public static func mock(
+        id: String = "mock-terminal-id",
+        name: String = "Mock Terminal",
+        pid: Int = 12345,
+        cwd: String = "/Users/test/project",
+        shellType: ShellType = .bash,
+        isActive: Bool = true,
+        isClaudeCode: Bool = false,
+        createdAt: Date = Date(timeIntervalSince1970: 1609459200),
+        lastActivity: Date = Date(timeIntervalSince1970: 1609459260),
+        dimensions: Dimensions = Dimensions(cols: 80, rows: 24),
+        status: Status = .active
+    ) -> Terminal {
         return Terminal(
-            id: "mock-terminal-id",
-            name: "Mock Terminal",
-            pid: 12345,
-            cwd: "/Users/test/project",
-            shellType: .bash,
-            isActive: true,
-            isClaudeCode: false,
-            createdAt: Date(timeIntervalSince1970: 1609459200),
-            lastActivity: Date(timeIntervalSince1970: 1609459260),
-            dimensions: Dimensions(cols: 80, rows: 24),
-            status: .active
+            id: id,
+            name: name,
+            pid: pid,
+            cwd: cwd,
+            shellType: shellType,
+            isActive: isActive,
+            isClaudeCode: isClaudeCode,
+            createdAt: createdAt,
+            lastActivity: lastActivity,
+            dimensions: dimensions,
+            status: status
         )
     }
 }
