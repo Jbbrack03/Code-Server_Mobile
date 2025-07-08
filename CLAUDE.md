@@ -97,7 +97,9 @@ The repository contains a mobile terminal access solution that addresses the lim
 - ✅ **WebSocket Client** - MobileTerminalWebSocketClient with real-time communication, reconnection logic, and state management (13 tests passing)
 - ✅ **REST API Client** - Complete HTTP client with authentication, error handling, and retry logic (21 tests passing)
 - ✅ **Keychain Service** - Secure credential storage with biometric authentication (Face ID/Touch ID/Optic ID) and comprehensive error handling (29 tests passing)
-- ✅ **iOS Test Coverage** - 104 tests passing total (100% success rate), strict TDD methodology followed
+- ✅ **TerminalViewModel** - Main terminal management view model with full state management and error handling (28 tests passing)
+- ✅ **ConnectionViewModel** - Connection profile management with network detection and QR code support (21 tests passing)
+- ✅ **iOS Test Coverage** - 153 tests passing total (100% success rate), strict TDD methodology followed
 
 #### Project Documentation
 - `mobile-terminal-prd.md` - Original product requirements document
@@ -228,10 +230,11 @@ npm run dev                   # Watch mode development
 12. ✅ iOS App Foundation - SwiftUI architecture and core models implemented
 13. ✅ iOS REST API Client - HTTP terminal management with error handling
 14. ✅ iOS Keychain Service - Secure credential storage with biometric auth
-15. 📋 iOS ViewModels - TerminalViewModel and ConnectionViewModel
-16. 📋 iOS SwiftTerm Integration - Terminal emulation with gesture support
-17. 📋 Integration Testing - End-to-end validation
-18. 📋 Network Configuration Testing - Multi-environment validation
+15. ✅ iOS ViewModels - TerminalViewModel and ConnectionViewModel
+16. 📋 iOS SwiftUI Views - Main app views and navigation
+17. 📋 iOS SwiftTerm Integration - Terminal emulation with gesture support
+18. 📋 Integration Testing - End-to-end validation
+19. 📋 Network Configuration Testing - Multi-environment validation
 
 #### Current Implementation Status (January 8, 2025)
 
@@ -273,6 +276,10 @@ npm run dev                   # Watch mode development
   - Biometric authentication support (Face ID/Touch ID/Optic ID)
   - Hardware-encrypted credential storage
   - Comprehensive error handling and user-friendly messages
+- ✅ **ViewModels** - MVVM architecture implementation
+  - TerminalViewModel for terminal state management and operations
+  - ConnectionViewModel for profile management and network detection
+  - Full error handling and state management
 
 **VS Code Extension Test Coverage:**
 - **253 tests passing** out of 253 total (100% success rate) ✅
@@ -285,13 +292,11 @@ npm run dev                   # Watch mode development
 - VS Code extension commands with status bar fully implemented
 
 **iOS App Test Coverage:**
-- **104 tests passing** out of 104 total (100% success rate) ✅
-- **6 test suites passing** (Terminal, ConnectionProfile, CommandShortcut, WebSocketClient, APIClient, KeychainService)
-- All core models have comprehensive test coverage including Codable, validation, and edge cases
-- WebSocket client with real-time communication, reconnection logic, and state management
-- ✅ **REST API Client** - Complete HTTP client with authentication, error handling, and retry logic
-- ✅ **Keychain Service** - Secure credential storage with biometric authentication and error handling
-- Foundation ready for ViewModels and SwiftTerm integration
+- **153 tests passing** out of 153 total (100% success rate) ✅
+- **8 test suites passing** (Terminal, ConnectionProfile, CommandShortcut, WebSocketClient, APIClient, KeychainService, TerminalViewModel, ConnectionViewModel)
+- All core models and ViewModels have comprehensive test coverage
+- Full MVVM architecture with proper separation of concerns
+- Ready for SwiftUI Views and SwiftTerm integration
 
 ## Development in This Repository
 

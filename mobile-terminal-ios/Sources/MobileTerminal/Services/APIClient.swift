@@ -1,7 +1,7 @@
 import Foundation
 
 /// HTTP client for communicating with the Mobile Terminal server
-class APIClient {
+public class APIClient {
     // MARK: - Properties
     
     let baseURL: URL
@@ -12,7 +12,7 @@ class APIClient {
     
     // MARK: - Initialization
     
-    init(baseURL: URL, apiKey: String, urlSession: URLSessionProtocol = URLSession.shared) {
+    public init(baseURL: URL, apiKey: String, urlSession: URLSessionProtocol = URLSession.shared) {
         self.baseURL = baseURL
         self.apiKey = apiKey
         self.urlSession = urlSession

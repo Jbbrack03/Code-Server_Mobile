@@ -2,7 +2,7 @@ import Foundation
 
 // MARK: - API Error Types
 
-enum APIError: Error, LocalizedError, Equatable {
+public enum APIError: Error, LocalizedError, Equatable {
     case networkError(Error)
     case serverError(statusCode: Int, message: String?)
     case unauthorized(message: String)
@@ -16,7 +16,7 @@ enum APIError: Error, LocalizedError, Equatable {
     case invalidResponse
     case unknown(Error)
     
-    var errorDescription: String? {
+    public var errorDescription: String? {
         switch self {
         case .networkError(let error):
             return "Network error: \(error.localizedDescription)"
@@ -45,7 +45,7 @@ enum APIError: Error, LocalizedError, Equatable {
         }
     }
     
-    var recoverySuggestion: String? {
+    public var recoverySuggestion: String? {
         switch self {
         case .networkError:
             return "Check your internet connection and try again."
@@ -74,7 +74,7 @@ enum APIError: Error, LocalizedError, Equatable {
         }
     }
     
-    static func == (lhs: APIError, rhs: APIError) -> Bool {
+    public static func == (lhs: APIError, rhs: APIError) -> Bool {
         switch (lhs, rhs) {
         case (.networkError, .networkError),
              (.timeout, .timeout),
