@@ -5,7 +5,7 @@ let package = Package(
     name: "MobileTerminal",
     platforms: [
         .iOS(.v16),
-        .macOS(.v10_15)
+        .macOS(.v12)
     ],
     products: [
         .library(

@@ -231,7 +231,7 @@ npm run dev                   # Watch mode development
 13. ✅ iOS REST API Client - HTTP terminal management with error handling
 14. ✅ iOS Keychain Service - Secure credential storage with biometric auth
 15. ✅ iOS ViewModels - TerminalViewModel and ConnectionViewModel
-16. 📋 iOS SwiftUI Views - Main app views and navigation
+16. ✅ iOS SwiftUI Views - Main app views and navigation (MobileTerminalApp, ContentView, OnboardingView, ConnectionSetupView, QRScannerView)
 17. 📋 iOS SwiftTerm Integration - Terminal emulation with gesture support
 18. 📋 Integration Testing - End-to-end validation
 19. 📋 Network Configuration Testing - Multi-environment validation
@@ -280,6 +280,12 @@ npm run dev                   # Watch mode development
   - TerminalViewModel for terminal state management and operations
   - ConnectionViewModel for profile management and network detection
   - Full error handling and state management
+- ✅ **SwiftUI Views** - Complete app interface implementation
+  - MobileTerminalApp: Main app entry point with WindowGroup
+  - ContentView: Root view coordinator
+  - OnboardingView: 3-slide onboarding flow with gestures and animations
+  - ConnectionSetupView: Connection type and method selection interface
+  - QRScannerView: Camera-based QR code scanning with fallback options
 
 **VS Code Extension Test Coverage:**
 - **253 tests passing** out of 253 total (100% success rate) ✅
@@ -292,11 +298,11 @@ npm run dev                   # Watch mode development
 - VS Code extension commands with status bar fully implemented
 
 **iOS App Test Coverage:**
-- **153 tests passing** out of 153 total (100% success rate) ✅
-- **8 test suites passing** (Terminal, ConnectionProfile, CommandShortcut, WebSocketClient, APIClient, KeychainService, TerminalViewModel, ConnectionViewModel)
-- All core models and ViewModels have comprehensive test coverage
+- **201 tests passing** out of 201 total (100% success rate) ✅
+- **13 test suites passing** (Terminal, ConnectionProfile, CommandShortcut, WebSocketClient, APIClient, KeychainService, TerminalViewModel, ConnectionViewModel, MobileTerminalApp, ContentView, OnboardingView, ConnectionSetupView, QRScannerView)
+- All core models, ViewModels, and SwiftUI Views have comprehensive test coverage
 - Full MVVM architecture with proper separation of concerns
-- Ready for SwiftUI Views and SwiftTerm integration
+- Complete iOS app foundation with onboarding and connection setup flows
 
 ## Development in This Repository
 
