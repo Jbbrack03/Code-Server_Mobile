@@ -4,13 +4,8 @@ import Combine
 
 // MARK: - Mock Dependencies
 
-class MockAPIClient: APIClient {
-    var shouldFailHealthCheck = false
-    var shouldFailTerminalList = false
-    var shouldFailTerminalSelect = false
+class MockAPIClient: SharedMockAPIClient {
     var shouldFailTerminalDetails = false
-    var shouldFailSendInput = false
-    var shouldFailResize = false
     
     var healthCheckCallCount = 0
     var getTerminalsCallCount = 0
@@ -20,15 +15,16 @@ class MockAPIClient: APIClient {
     var resizeTerminalCallCount = 0
     
     var mockHealthResponse = HealthResponse(status: .healthy, version: "1.0.0", uptime: 3600, terminals: 2)
-    var mockTerminals = [
-        Terminal.mock(id: "1", name: "Terminal 1", isActive: true),
-        Terminal.mock(id: "2", name: "Terminal 2", isActive: false)
-    ]
-    var mockActiveTerminalId: String? = "1"
     var mockTerminalBuffer = ["Line 1", "Line 2", "Line 3"]
     
-    init() {
-        super.init(baseURL: URL(string: "http://localhost:8092")!, apiKey: "test-api-key")
+    override init() {
+        super.init()
+        self.mockTerminals = [
+            Terminal.mock(id: "1", name: "Terminal 1", isActive: true),
+            Terminal.mock(id: "2", name: "Terminal 2", isActive: false)
+        ]
+        self.mockActiveTerminalId = "1"
+        self.mockBuffer = mockTerminalBuffer
     }
     
     override func getHealth() async throws -> HealthResponse {
