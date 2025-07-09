@@ -123,6 +123,24 @@ export class WebSocketServerManager {
   }
 
   /**
+   * Broadcast terminal data to all connected clients (simplified version)
+   */
+  broadcastTerminalData(terminalId: string, data: string): void {
+    const message: WebSocketMessage = {
+      id: uuidv4(),
+      type: 'terminal.output' as MessageType,
+      timestamp: Date.now(),
+      payload: {
+        terminalId,
+        data,
+        sequence: ++this.messageSequence
+      }
+    };
+
+    this.broadcastMessage(message);
+  }
+
+  /**
    * Broadcast terminal list to all connected clients
    */
   broadcastTerminalList(): void {
@@ -148,30 +166,34 @@ export class WebSocketServerManager {
   private verifyClient(info: { req: any; origin: string; secure: boolean }, callback: (result: boolean, code?: number, message?: string) => void): void {
     (async () => {
       try {
-        // Check connection limit
+        // Check connection limit - reject immediately for resource constraints
         if (this.clients.size >= this.maxConnections) {
-          callback(false, 1013, 'Too many connections');
+          info.req.authError = { code: 1013, message: 'Too many connections' };
+          callback(true); // Accept connection but mark for immediate closure
           return;
         }
 
-        // Extract API key from headers
+        // Store auth result in request for later processing
         const apiKey = info.req.headers['x-api-key'];
         if (!apiKey) {
-          callback(false, 1008, 'Missing API key');
+          info.req.authError = { code: 1008, message: 'Missing API key' };
+          callback(true); // Accept connection but mark for immediate closure
           return;
         }
 
         // Validate API key
         const isValid = await this.apiKeyManager.validateApiKeyAsync(apiKey);
         if (!isValid) {
-          callback(false, 1008, 'Invalid API key');
+          info.req.authError = { code: 1008, message: 'Invalid API key' };
+          callback(true); // Accept connection but mark for immediate closure
           return;
         }
 
         callback(true);
       } catch (error) {
         console.error('WebSocket client verification error:', error);
-        callback(false, 1011, 'Authentication error');
+        info.req.authError = { code: 1011, message: 'Authentication error' };
+        callback(true); // Accept connection but mark for immediate closure
       }
     })();
   }
@@ -180,6 +202,12 @@ export class WebSocketServerManager {
    * Handle new WebSocket connection
    */
   private handleConnection(ws: AuthenticatedWebSocket, req: any): void {
+    // Check for authentication errors from verifyClient
+    if (req.authError) {
+      ws.close(req.authError.code, req.authError.message);
+      return;
+    }
+
     const clientId = uuidv4();
     ws.clientId = clientId;
     ws.isAuthenticated = true; // Already authenticated via verifyClient

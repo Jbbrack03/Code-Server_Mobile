@@ -31,6 +31,36 @@ brew services restart code-server  # Restart service
 # With autonomous mode
 claude --dangerously-skip-permissions
 ```
+## Test-Driven Development (MANDATORY)
+
+### TDD Checkpoint Questions
+Before writing ANY code, ask:
+1. ❓ **"Have I reviewed existing code to understand patterns?"**
+2. ❓ **"Have I researched unknowns and calculated test expectations?"**
+3. ❓ **"Have I written exactly ONE failing test?"**
+4. ❓ **"Have I seen that ONE test fail?"**
+5. ❓ **"Am I implementing ONLY what makes that ONE test pass?"**
+6. ❓ **"Will I commit immediately after this test passes?"**
+
+### Core TDD Rules
+1. **RED-GREEN-REFACTOR ONLY**
+   - Write failing test FIRST
+   - Write MINIMAL code to pass
+   - Refactor while keeping tests green
+
+2. **TEST IMMUTABILITY**
+   - Tests are CONTRACTS - don't change them
+   - If test seems wrong, implementation is wrong
+
+3. **NO IMPLEMENTATION WITHOUT TESTS**
+   - Every line of code needs a test
+   - No "temporary" code without tests
+
+4. **SINGLE TEST DISCIPLINE**
+   - Write exactly ONE test at a time
+   - See it fail before implementing
+   - Commit after each passing test
+
 
 ### Session Management System
 
@@ -89,7 +119,8 @@ The repository contains a mobile terminal access solution that addresses the lim
 - ✅ **NetworkDiscoveryService** - Local network URL detection, mDNS preparation (21 tests passing)
 - ✅ **Extension Commands** - VS Code commands implementation with status bar (21 tests passing)
 - ✅ **Terminal I/O Streaming** - WebSocket terminal data streaming service (11 tests passing)
-- ✅ **Test Coverage** - 253 tests passing total (100% success rate), strict TDD methodology followed
+- ✅ **Integration Testing** - End-to-end validation with proper TDD methodology (21 tests passing)
+- ✅ **Test Coverage** - 274 tests passing total (100% success rate), strict TDD methodology followed
 
 #### iOS App Foundation Implementation (January 2025 - Last Updated: January 9, 2025)
 - ✅ **iOS Project Setup** - SwiftUI architecture with Package.swift and dependency management (SwiftTerm, Starscream, KeychainAccess)
@@ -208,7 +239,7 @@ mobile-terminal-extension/
 - **Security**: Cryptographic API keys, secure storage, timing-safe validation
 - **Real-time Communication**: WebSocket streaming, message queuing, connection management
 - **Type Safety**: Comprehensive TypeScript interfaces and error handling
-- **Testing**: 186 tests with Jest, full TDD methodology (100% success rate)
+- **Testing**: 274 tests with Jest, full TDD methodology (100% success rate)
 - **Server Orchestration**: Unified Express + WebSocket server lifecycle management
 - **QR Code Display**: VS Code webview with theming support for connection profiles
 - **Network Discovery**: Automatic local network interface detection and URL generation
@@ -240,8 +271,10 @@ npm run dev                   # Watch mode development
 15. ✅ iOS ViewModels - TerminalViewModel and ConnectionViewModel
 16. ✅ iOS SwiftUI Views - Main app views and navigation (MobileTerminalApp, ContentView, OnboardingView, ConnectionSetupView, QRScannerView)
 17. ✅ iOS SwiftTerm Integration - Terminal emulation with gesture support, font configuration, and keyboard shortcuts
-18. 📋 Integration Testing - End-to-end validation
-19. 📋 Network Configuration Testing - Multi-environment validation
+18. ✅ Integration Testing - End-to-end validation with proper TDD methodology
+19. 📋 Terminal Management Integration Tests - Complex terminal interaction scenarios
+20. 📋 Error Handling Integration Tests - Comprehensive error scenario validation
+21. 📋 Network Configuration Testing - Multi-environment validation
 
 #### Current Implementation Status (January 9, 2025)
 
@@ -301,14 +334,18 @@ npm run dev                   # Watch mode development
   - TerminalDataStreamer: Real-time WebSocket data streaming to terminal
 
 **VS Code Extension Test Coverage:**
-- **253 tests passing** out of 253 total (100% success rate) ✅
-- **14 test suites passing** out of 14 total
+- **274 tests passing** out of 274 total (100% success rate) ✅
+- **17 test suites passing** out of 17 total
 - All core services have comprehensive test coverage
 - WebSocket authentication and connection management fully implemented
 - Server orchestration and lifecycle management complete
 - QR code webview display with full VS Code integration
 - Network discovery for automatic connection URL generation
 - VS Code extension commands with status bar fully implemented
+- **Integration testing** with proper TDD methodology (21 tests):
+  - Server Health endpoint validation (5 tests)
+  - API Authentication with timing-safe validation (8 tests)
+  - WebSocket Communication with proper error codes (8 tests)
 
 **iOS App Test Coverage:**
 - **283 tests passing** out of 283 total (100% success rate) ✅

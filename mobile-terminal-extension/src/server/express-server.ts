@@ -42,7 +42,9 @@ export class ExpressServer {
 
     return new Promise((resolve, reject) => {
       this.server = this.app.listen(port, host, () => {
-        this.port = port;
+        // Get the actual port that was assigned (important when port is 0)
+        const address = this.server!.address();
+        this.port = typeof address === 'string' ? port : address!.port;
         this.host = host;
         this.startTime = new Date();
         resolve();
@@ -263,7 +265,7 @@ export class ExpressServer {
   /**
    * Get all terminals
    */
-  private handleGetTerminals(req: AuthenticatedRequest, res: Response): void {
+  private handleGetTerminals(req: AuthenticatedRequest, res: Response, next: NextFunction): void {
     try {
       const terminals = this.terminalService.getTerminals();
       const activeTerminalId = this.terminalService.getActiveTerminalId();
@@ -275,7 +277,7 @@ export class ExpressServer {
 
       res.json(response);
     } catch (error) {
-      throw error; // Let error handler catch it
+      next(error); // Pass error to error handler
     }
   }
 
